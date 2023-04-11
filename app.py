@@ -66,8 +66,11 @@ def home():
     cur.execute("select * from student WHERE id=?",(str(user)))  
     rows = cur.fetchall()
     for row in rows:
-        cur.execute("select * from sponsor WHERE id=?",(str(row["donar"])))  
-        data = cur.fetchall()
+        if row["no"]!="no":
+            cur.execute("select * from sponsor WHERE id=?",(str(row["donar"])))  
+            data = cur.fetchall()
+        else:
+            data="no"
     return render_template("student/home.html",rows=rows,data=data)
 
 @app.route("/sponsor/login")  
