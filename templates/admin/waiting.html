@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Admin - Donar Site</title>
+    <title>Admin</title>
     <link rel="stylesheet" href="/static/vendors/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="/static/vendors/css/vendor.bundle.base.css">
     <link rel="stylesheet" href="/static/css/style.css">
@@ -74,6 +74,12 @@
                 </a>
               </li>
         
+              <li class="nav-item">
+                <a class="nav-link" href="/admin/sponsor">
+                  <span class="menu-title">Sponsors</span>
+                  <i class="mdi mdi-account menu-icon"></i>
+                </a>
+              </li>
               
             </ul>
         </nav>
@@ -83,25 +89,70 @@
                 <h4 class="text-secondary">
                     Waiting List Students :&ensp;&ensp;
                 </h4>
-
-                <div class="accordion" id="accordionExample">
+                {% for row in rows %}
+                <div class="accordion" id="accordion{{row['id']}}">
                     <div class="accordion-item">
-                      <h2 class="accordion-header" id="headingTwo">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                          Accordion Item #2
+                      <h2 class="accordion-header" id="heading{{row['id']}}">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{row['id']}}" aria-expanded="false" aria-controls="collapse{{row['id']}}">
+                          {{row["name"]}}
                         </button>
                       </h2>
-                      <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                      <div id="collapse{{row['id']}}" class="accordion-collapse collapse" aria-labelledby="heading{{row['id']}}" data-bs-parent="#accordion{{row['id']}}">
                         <div class="accordion-body">
+                          <div class="row">
+                            <div class="col-6"><p>Name - {{row["name"]}}</p></div>
+                            <div class="col-6"><p>Mobile - {{row["mobile"]}}</p></div>
+                            <div class="col-6"><p>Email - {{row["email"]}}</p></div>
+                            <div class="col-6"><p>Gender - {{row["gender"]}}</p></div>
+                            <div class="col-6"><p>+12 Mark - {{row["mark"]}}</p></div>
+                            <div class="col-6"><p>Interested Course - {{row["course"]}}</p></div>
+                            <div class="col-6"><p>Annual Income - {{row["income"]}}</p></div>
+                            <div class="col-6"><p>Address - {{row["address"]}}</p></div>
+                            <div class="col-6"><p>District - {{row["district"]}}</p></div>
+                            <div class="col-6"><p>Marksheet - <a target="_blank" href="/static/uploads/{{row['markfile']}}">Click here</a></p></div>
+                            <div class="col-6"><p>Income Certificate - <a target="_blank" href="/static/uploads/{{row['incomefile']}}">Click here</a></p></div>
+                            <div class="col-6"><p>Proof - <a target="_blank" href="/static/uploads/{{row['profffile']}}">Click here</a></p></div>
+                            <div class="col-6"></div>
+                            <div class="col-3">
+                              <form action="/admin/approve" method="get" >
+                                <input type="hidden" name="id" value="{{row['id']}}">
+                                <button class="btn btn-success" class="float-right">Approve</button>
+                              </form>
+                            </div>
+                            <div class="col-3">
+                              <form action="/admin/deny" method="get">
+                                <input type="hidden" name="id" value="{{row['id']}}">
+                                <button class="btn btn-danger">Deny</button>
+                              </form>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
                 </div>
+                {% endfor %}
 
+                {% if rows|length == 0 %}
                 <h4 class="mt-4 text-center text-secondary">Nothing Found!</h4>
+                {% endif %}
             </div>
         </div>
-
+        <script>
+          const queryString = window.location.search;
+          const urlParams = new URLSearchParams(queryString);
+          if(urlParams.get('err')){
+            document.write("<div id='err' style='position:fixed;bottom:30px; right:30px;background-color:#FF0000;padding:10px;border-radius:10px;box-shadow:2px 2px 4px #aaa;color:white;font-weight:600'>"+urlParams.get('err')+"</div>")
+          }
+          setTimeout(()=>{
+              document.getElementById("err").style.display="none"
+          }, 3000)
+          if(urlParams.get('msg')){
+            document.write("<div id='msg' style='position:fixed;bottom:30px; right:30px;background-color:#4CAF50;padding:10px;border-radius:10px;box-shadow:2px 2px 4px #aaa;color:white;font-weight:600'>"+urlParams.get('msg')+"</div>")
+          }
+          setTimeout(()=>{
+              document.getElementById("msg").style.display="none"
+          }, 3000)
+      </script>
 </div>
 </div>
 <script src="/static/vendors/js/vendor.bundle.base.js"></script>

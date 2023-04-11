@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Admin</title>
+    <link rel="stylesheet" href="/static/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="/static/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+  </head>
+  <body>
+    <div class="container-scroller">
+      <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+          <a class="navbar-brand brand-logo" href=""><img src="/static/images/logo.svg" class="h-100 w-75" alt="logo" /></a>
+          <a class="navbar-brand brand-logo-mini" href=""><img src="/static/images/logo-mini.svg" alt="logo" /></a>
+        </div>
+        <div class="navbar-menu-wrapper d-flex align-items-stretch">
+          <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+            <span class="mdi mdi-menu"></span>
+          </button>
+          <ul class="navbar-nav navbar-nav-right">
+            <li class="nav-item nav-profile dropdown">
+              <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                <div class="nav-profile-text">
+                  <p class="mb-1 text-black">Admin</p>
+                </div>
+              </a>
+              <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
+                <a class="dropdown-item" href="#">
+                  <i class="mdi mdi-logout me-2 text-primary"></i>Logout</a>
+              </div>
+            </li>
+          </ul>
+          <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+            <span class="mdi mdi-menu"></span>
+          </button>
+        </div>
+      </nav>
+      <div class="container-fluid page-body-wrapper">
+
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+            <ul class="nav">
+              <li class="nav-item nav-profile">
+                <a href="#" class="nav-link">
+                  <div class="nav-profile-image">
+                    <img src="/static/images/face.jpg" alt="profile">
+                    <span class="login-status online"></span>
+                  </div>
+                  <div class="nav-profile-text d-flex flex-column">
+                    <span class="font-weight-bold mb-2">Admin</span>
+                    <span class="text-secondary text-small">Overall Admin</span>
+                  </div>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/admin/home">
+                  <span class="menu-title">Dashboard</span>
+                  <i class="mdi mdi-home menu-icon"></i>
+                </a>
+              </li>
+              
+              <li class="nav-item">
+                <a class="nav-link" href="/admin/waiting">
+                  <span class="menu-title">Waiting List</span>
+                  <i class="mdi mdi-account menu-icon"></i>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="/admin/student">
+                  <span class="menu-title">Student</span>
+                  <i class="mdi mdi-account menu-icon"></i>
+                </a>
+              </li>
+        
+              <li class="nav-item">
+                <a class="nav-link" href="/admin/sponsor">
+                  <span class="menu-title">Sponsors</span>
+                  <i class="mdi mdi-account menu-icon"></i>
+                </a>
+              </li>
+              
+            </ul>
+        </nav>
+
+        <div class="main-panel">
+            <div class="content-wrapper">
+                <h4 class="text-secondary">
+                    Sponsors :&ensp;&ensp;
+                </h4>
+                {% for row in rows %}
+                <div class="accordion" id="accordion{{row['id']}}">
+                    <div class="accordion-item">
+                      <h2 class="accordion-header" id="heading{{row['id']}}">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{row['id']}}" aria-expanded="false" aria-controls="collapse{{row['id']}}">
+                          {{row["name"]}}
+                        </button>
+                      </h2>
+                      <div id="collapse{{row['id']}}" class="accordion-collapse collapse" aria-labelledby="heading{{row['id']}}" data-bs-parent="#accordion{{row['id']}}">
+                        <div class="accordion-body">
+                          <div class="row">
+                            <div class="col-6"><p>Name - {{row["name"]}}</p></div>
+                            <div class="col-6"><p>Mobile - {{row["mobile"]}}</p></div>
+                            <div class="col-6"><p>Email - {{row["email"]}}</p></div>
+                            <div class="col-6"><p>Gender - {{row["gender"]}}</p></div>
+                            <div class="col-6"><p>Address - {{row["address"]}}</p></div>
+                            <div class="col-6"><p>Sponsor Type - {{row["type"]}}</p></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+                {% if rows|length == 0 %}
+                <h4 class="mt-4 text-center text-secondary">Nothing Found!</h4>
+                {% endif %}
+            </div>
+        </div>
+        <script>
+          const queryString = window.location.search;
+          const urlParams = new URLSearchParams(queryString);
+          if(urlParams.get('err')){
+            document.write("<div id='err' style='position:fixed;bottom:30px; right:30px;background-color:#FF0000;padding:10px;border-radius:10px;box-shadow:2px 2px 4px #aaa;color:white;font-weight:600'>"+urlParams.get('err')+"</div>")
+          }
+          setTimeout(()=>{
+              document.getElementById("err").style.display="none"
+          }, 3000)
+          if(urlParams.get('msg')){
+            document.write("<div id='msg' style='position:fixed;bottom:30px; right:30px;background-color:#4CAF50;padding:10px;border-radius:10px;box-shadow:2px 2px 4px #aaa;color:white;font-weight:600'>"+urlParams.get('msg')+"</div>")
+          }
+          setTimeout(()=>{
+              document.getElementById("msg").style.display="none"
+          }, 3000)
+      </script>
+</div>
+</div>
+<script src="/static/vendors/js/vendor.bundle.base.js"></script>
+<script src="/static/js/off-canvas.js"></script>
+<script src="/static/js/hoverable-collapse.js"></script>
+<script src="/static/js/misc.js"></script>
+</body>
+</html>

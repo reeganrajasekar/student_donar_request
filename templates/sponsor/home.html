@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Sponsor</title>
+    <link rel="stylesheet" href="/static/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="/static/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top border-bottom" style="background:white;box-shadow:1px 1px 2px #aaa;">
+    <div class="container">
+        <a class="navbar-brand" style="font-size:22px;font-weight:900;color:#2b74e2" href="">
+            <img src="/static/images/logo.jpg" height="50px" width="auto" alt="">
+        </a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" style="color:#b66dff" aria-current="page" href="/sponsor/home">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link"  aria-current="page" href="/sponsor/list">List</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="/sponsor/login?msg=Logged Out Successfully!">Logout</a>
+              </li>
+            </ul>
+        </div>
+    </div>
+  </nav>
+  <main class="container my-4">
+    <p style="background-color:#b66dff66;padding:10px;border-radius:8px;color:#444;border:1px solid #ccc;font-size:18px">Welcome <span style="font-size:20px;color:white">{% for row in data %}{{row["name"]}}{% endfor %}</span> ,</p>
+    <br>
+    <form action="" method="get" class="row">
+      <div class="col-5">
+        <select name="type" required class="form-select form-control-lg">
+          <option value="mark" selected>+12 Mark (min)</option>
+          <option value="course">Course Interested</option>
+          <option value="income">Annual Income (max)</option>
+          <option value="district">District</option>
+        </select>
+      </div>
+      <div class="col-5">
+        <input type="text" name="val" class="form-control form-control-lg" placeholder="Search">
+      </div>
+      <div class="col-2">
+        <button class="btn btn-primary form-control-lg">Search</button>
+      </div>
+    </form>
+    <br>
+    {% for row in rows %}
+      <div class="accordion" id="accordion{{row['id']}}">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="heading{{row['id']}}">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{row['id']}}" aria-expanded="false" aria-controls="collapse{{row['id']}}">
+                {{row["name"]}}
+              </button>
+            </h2>
+            <div id="collapse{{row['id']}}" class="accordion-collapse collapse" aria-labelledby="heading{{row['id']}}" data-bs-parent="#accordion{{row['id']}}">
+              <div class="accordion-body">
+                <div class="row">
+                  <div class="col-6"><p>Name - {{row["name"]}}</p></div>
+                  <div class="col-6"><p>Mobile - {{row["mobile"]}}</p></div>
+                  <div class="col-6"><p>Email - {{row["email"]}}</p></div>
+                  <div class="col-6"><p>Gender - {{row["gender"]}}</p></div>
+                  <div class="col-6"><p>+12 Mark - {{row["mark"]}}</p></div>
+                  <div class="col-6"><p>Interested Course - {{row["course"]}}</p></div>
+                  <div class="col-6"><p>Annual Income - {{row["income"]}}</p></div>
+                  <div class="col-6"><p>Address - {{row["address"]}}</p></div>
+                  <div class="col-6"><p>District - {{row["district"]}}</p></div>
+                  <div class="col-6"><p>Marksheet - <a target="_blank" href="/static/uploads/{{row['markfile']}}">Click here</a></p></div>
+                  <div class="col-6"><p>Income Certificate - <a target="_blank" href="/static/uploads/{{row['incomefile']}}">Click here</a></p></div>
+                  <div class="col-6"><p>Proof - <a target="_blank" href="/static/uploads/{{row['profffile']}}">Click here</a></p></div>
+                  <div class="col-6"></div>
+                  <div class="col-3">
+                  </div>
+                  <div class="col-3">
+                    <form action="/sponsor/accept" method="get">
+                      <input type="hidden" name="id" value="{{row['id']}}">
+                      <button class="btn btn-success">Accept</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+      {% endfor %}
+
+      {% if rows|length == 0 %}
+      <h4 class="mt-4 text-center text-secondary">Nothing Found!</h4>
+      {% endif %}
+  </main>
+
+<script src="/static/vendors/js/vendor.bundle.base.js"></script>
+<script src="/static/js/off-canvas.js"></script>
+<script src="/static/js/hoverable-collapse.js"></script>
+<script src="/static/js/misc.js"></script>
+</body>
+</html>

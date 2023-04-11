@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Student</title>
+    <link rel="stylesheet" href="/static/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="/static/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top border-bottom" style="background:white;box-shadow:1px 1px 2px #aaa;">
+    <div class="container">
+        <a class="navbar-brand" style="font-size:22px;font-weight:900;color:#2b74e2" href="">
+            <img src="/static/images/logo.jpg" height="50px" width="auto" alt="">
+        </a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" style="color:#b66dff" aria-current="page" href="/home">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="/login?msg=Logged Out Successfully!">Logout</a>
+              </li>
+            </ul>
+        </div>
+    </div>
+  </nav>
+  <main class="container my-4">
+    <p style="background-color:#b66dff66;padding:10px;border-radius:8px;color:#444;border:1px solid #ccc;font-size:18px">Welcome <span style="font-size:20px;color:white">{% for row in rows %}{{row["name"]}}{% endfor %}</span> ,</p>
+    <br>
+    {% for row in rows %}
+    {% if row["status"]=="yes" %}
+      {% if row["status"]=="yes" %}
+      {% for row in data %}
+      <div class="container">
+        <h4>Sponsor Details :</h4>
+        <div class="row my-4">
+          <div class="col-6"><p>Name : {{row["name"]}}</p></div>
+          <div class="col-6"><p>Gender : {{row["gender"]}}</p></div>
+          <div class="col-6"><p>Mobile : {{row["mobile"]}}</p></div>
+          <div class="col-6"><p>Email : {{row["email"]}}</p></div>
+          <div class="col-6"><p>Address : {{row["address"]}}</p></div>
+          <div class="col-6"><p>Sponsor Type : {{row["type"]}}</p></div>
+        </div>
+      </div>
+      {% endfor %}
+      {% elif row["donar"]=="no" %}
+      <h4 class="mt-4 text-center text-secondary">Your Request is Accepted and Now You are in the Sponsors Search</h4>
+      {% endif %}
+    {% elif row["status"]=="no" %}
+      <h4 class="mt-4 text-center text-secondary">Your are in Waiting List</h4>
+    {% else %}
+      <h4 class="mt-4 text-center text-secondary">Your Application Removed</h4>
+    {% endif %}
+    {% endfor %}
+  </main>
+
+<script src="/static/vendors/js/vendor.bundle.base.js"></script>
+<script src="/static/js/off-canvas.js"></script>
+<script src="/static/js/hoverable-collapse.js"></script>
+<script src="/static/js/misc.js"></script>
+</body>
+</html>
