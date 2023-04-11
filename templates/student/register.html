@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Student Signup</title>
+    <link rel="stylesheet" href="/static/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="/static/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+  </head>
+  <body>
+    <div class="container-scroller">
+      <div class="container-fluid page-body-wrapper full-page-wrapper">
+        <div class="content-wrapper d-flex align-items-center auth">
+          <div class="row flex-grow">
+            <div class="col-lg-6 mx-auto">
+              <div class="auth-form-light text-left p-4">
+                <div class="brand-logo text-center">
+                  <img src="/static/images/logo.svg">
+                </div>
+                <h5 class="text-secondary">Student Signup Form</h5><br>
+                <form class="pt-1" action="/signup" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="">Full Name :</label>
+                        <input type="text" name="name" required class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Mobile :</label>
+                        <input type="number" name="mobile" required class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Mobile">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Email :</label>
+                        <input type="email" name="email" required class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Password :</label>
+                        <input type="password" name="password" required class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                        <label for="">+12 Mark :</label>
+                        <input type="number" name="mark" required class="form-control form-control-lg" id="exampleInputEmail1" placeholder="+12 Mark">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Interested Course :</label>
+                        <input type="text" name="course" required class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Interested Course">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Annual Income :</label>
+                        <input type="number" name="income" required class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Annual Income">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Address :</label>
+                        <input type="text" name="address" required class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Address">
+                    </div>
+                    <div class="form-group">
+                        <label for="">District :</label>
+                        <input type="text" name="District" required class="form-control form-control-lg" id="exampleInputEmail1" placeholder="District">
+                    </div>
+                    <div class="form-group">
+                        <label for="">+12 Mark Sheet :</label>
+                        <input type="file" name="markfile" required class="form-control form-control-lg" id="exampleInputEmail1" placeholder="+12 Mark Sheet">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Income Certificate:</label>
+                        <input type="file" name="incomefile" required class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Income Certificate">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Aadhaar / Smartcard  :</label>
+                        <input type="file" name="profffile" required class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Aadhaar / Smartcard">
+                    </div>
+                    <div class="mt-3 text-center">
+                        <button class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn">SIGN UP</button>
+                    </div>
+                    <div class="text-center mt-4 font-weight-light"> Do you have an account? <a href="/" class="text-primary">Sign In</a>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="/static/vendors/js/vendor.bundle.base.js"></script>
+    <script src="/static/js/off-canvas.js"></script>
+    <script src="/static/js/hoverable-collapse.js"></script>
+    <script src="/static/js/misc.js"></script>
+  </body>
+</html>
