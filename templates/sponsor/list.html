@@ -38,24 +38,40 @@
           <div class="accordion-item">
             <h2 class="accordion-header" id="heading{{row['id']}}">
               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{row['id']}}" aria-expanded="false" aria-controls="collapse{{row['id']}}">
-                {{row["name"]}}
+                {{row["fname"]}} {{row["lname"]}}
               </button>
             </h2>
             <div id="collapse{{row['id']}}" class="accordion-collapse collapse" aria-labelledby="heading{{row['id']}}" data-bs-parent="#accordion{{row['id']}}">
               <div class="accordion-body">
                 <div class="row">
-                  <div class="col-6"><p>Name - {{row["name"]}}</p></div>
-                  <div class="col-6"><p>Mobile - {{row["mobile"]}}</p></div>
-                  <div class="col-6"><p>Email - {{row["email"]}}</p></div>
-                  <div class="col-6"><p>Gender - {{row["gender"]}}</p></div>
-                  <div class="col-6"><p>+12 Mark - {{row["mark"]}}</p></div>
-                  <div class="col-6"><p>Interested Course - {{row["course"]}}</p></div>
-                  <div class="col-6"><p>Annual Income - {{row["income"]}}</p></div>
-                  <div class="col-6"><p>Address - {{row["address"]}}</p></div>
-                  <div class="col-6"><p>District - {{row["district"]}}</p></div>
-                  <div class="col-6"><p>Marksheet - <a target="_blank" href="/static/uploads/{{row['markfile']}}">Click here</a></p></div>
-                  <div class="col-6"><p>Income Certificate - <a target="_blank" href="/static/uploads/{{row['incomefile']}}">Click here</a></p></div>
-                  <div class="col-6"><p>Proof - <a target="_blank" href="/static/uploads/{{row['profffile']}}">Click here</a></p></div>
+                  <div class="col-9 row">
+                    <div class="col-12"><h4>Basic Details:</h4></div>
+                    <div class="col-6"><p><span class="text-muted">Name</span> - {{row["fname"]}} {{row["lname"]}}</p></div>
+                    <div class="col-6"><p><span class="text-muted">Mobile</span> - {{row["mobile"]}}</p></div>
+                    <div class="col-6"><p><span class="text-muted">Email</span> - {{row["email"]}}</p></div>
+                    <div class="col-6"><p><span class="text-muted">Gender</span> - {{row["gender"]}}</p></div>
+                    <div class="col-6"><p><span class="text-muted">DOB</span> - {{row["dob"]}}</p></div>
+                    <div class="col-6"><p><span class="text-muted">Nationality</span> - {{row["nation"]}}</p></div>
+                    <div class="col-6"><p><span class="text-muted">Father</span> - {{row["father"]}}</p></div>
+                    <div class="col-6"><p><span class="text-muted">Father Occupation</span> - {{row["fo"]}}</p></div>
+                    <div class="col-6"><p><span class="text-muted">Mother Name</span> - {{row["mother"]}}</p></div>
+                    <div class="col-6"><p><span class="text-muted">Mother Occupation</span> - {{row["mo"]}}</p></div>
+                    <div class="col-6"><p><span class="text-muted">Annual Income</span> - {{row["income"]}}</p></div>
+                    <div class="col-6"><p><span class="text-muted">HSC Mark</span> - {{row["mark"]}}</p></div>
+                    <div class="col-6"><p><span class="text-muted">Interested Course</span> - {{row["course"]}}</p></div>
+                    <div class="col-6"><p><span class="text-muted">District</span> - {{row["district"]}}</p></div>
+                    <div class="col-6"><p><span class="text-muted">Address</span> - {{row["address"]}}</p></div>
+                    <div class="col-12"><h4>Documents:</h4></div>
+                    <div class="col-6"><p><span class="text-muted">SSLC Marksheet</span> - <a target="_blank" href="/static/uploads/{{row['sslcfile']}}">Click here</a></p></div>
+                    <div class="col-6"><p><span class="text-muted">HSC Marksheet</span> - <a target="_blank" href="/static/uploads/{{row['hscfile']}}">Click here</a></p></div>
+                    <div class="col-6"><p><span class="text-muted">Income Certificate</span> - <a target="_blank" href="/static/uploads/{{row['incomefile']}}">Click here</a></p></div>
+                    <div class="col-6"><p><span class="text-muted">Proof</span> - <a target="_blank" href="/static/uploads/{{row['profffile']}}">Click here</a></p></div>
+                    <div class="col-6"><p><span class="text-muted">Bank Passbook</span> - <a target="_blank" href="/static/uploads/{{row['bankfile']}}">Click here</a></p></div>
+                    
+                  </div>
+                  <div class="col-3">
+                    <img src="/static/uploads/{{row['photofile']}}" class="w-100">
+                  </div>
                 </div>
               </div>
             </div>

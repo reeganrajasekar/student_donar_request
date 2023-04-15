@@ -30,7 +30,7 @@
     </div>
   </nav>
   <main class="container my-4">
-    <p style="background-color:#b66dff66;padding:10px;border-radius:8px;color:#444;border:1px solid #ccc;font-size:18px">Welcome <span style="font-size:20px;color:white">{% for row in rows %}{{row["name"]}}{% endfor %}</span> ,</p>
+    <p style="background-color:#b66dff66;padding:10px;border-radius:8px;color:#444;border:1px solid #ccc;font-size:18px">Welcome <span style="font-size:20px;color:white">{% for row in rows %}{{row["fname"]}}{% endfor %}</span> ,</p>
     <br>
     {% for row in rows %}
     {% if row["status"]=="yes" %}

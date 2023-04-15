@@ -38,19 +38,28 @@ def register():
 @app.route("/signup",methods = ['POST'])  
 def signup():
     try:
-        markfile = request.files['markfile']
-        markfilename = datetime.now().strftime('%Y%m-%d%H-%M%S-') + str(uuid4())+markfile.filename
-        markfile.save("static/uploads/"+markfilename)
+        sslcfile = request.files['sslcfile']
+        sslcfilename = datetime.now().strftime('%Y%m-%d%H-%M%S-') + str(uuid4())+sslcfile.filename
+        sslcfile.save("static/uploads/"+sslcfilename)
+        hscfile = request.files['hscfile']
+        hscfilename = datetime.now().strftime('%Y%m-%d%H-%M%S-') + str(uuid4())+hscfile.filename
+        hscfile.save("static/uploads/"+hscfilename)
         incomefile = request.files['incomefile']
         incomefilename = datetime.now().strftime('%Y%m-%d%H-%M%S-') + str(uuid4())+incomefile.filename
         incomefile.save("static/uploads/"+incomefilename)
         profffile = request.files['profffile']
         profffilename = datetime.now().strftime('%Y%m-%d%H-%M%S-') + str(uuid4())+profffile.filename
         profffile.save("static/uploads/"+profffilename)
+        photofile = request.files['photofile']
+        photofilename = datetime.now().strftime('%Y%m-%d%H-%M%S-') + str(uuid4())+photofile.filename
+        photofile.save("static/uploads/"+photofilename)
+        bankfile = request.files['bankfile']
+        bankfilename = datetime.now().strftime('%Y%m-%d%H-%M%S-') + str(uuid4())+bankfile.filename
+        bankfile.save("static/uploads/"+bankfilename)
         con = sqlite3.connect("database.db")  
         con.row_factory = sqlite3.Row
         cur = con.cursor()
-        cur.execute("Insert into student(name,email,password,mobile,gender,mark,course,income,address,district,markfile,incomefile,profffile,status,donar) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",(request.form["name"],request.form["email"],request.form["password"],request.form["mobile"],request.form["gender"],request.form["mark"],request.form["course"],request.form["income"],request.form["address"],request.form["district"],markfilename,incomefilename,profffilename,"no","no"))  
+        cur.execute("Insert into student(fname,lname,email,mobile,password,dob,gender,father,fo,mother,mo,income,address,nation,district,course,mark,sslcfile,hscfile,incomefile,profffile,photofile,bankfile,status,donar) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",(request.form["fname"],request.form["lname"],request.form["email"],request.form["mobile"],request.form["password"],request.form["dob"],request.form["gender"],request.form["father"],request.form["fo"],request.form["mother"],request.form["mo"],request.form["income"],request.form["address"],request.form["nation"],request.form["district"],request.form["course"],request.form["mark"],sslcfilename,hscfilename,incomefilename,profffilename,photofilename,bankfilename,"no","no"))  
         con.commit()
         return redirect("/login?msg=Account Created Successfully! Try Login")
     except:
@@ -66,7 +75,7 @@ def home():
     cur.execute("select * from student WHERE id=?",(str(user)))  
     rows = cur.fetchall()
     for row in rows:
-        if row["no"]!="no":
+        if row["donar"]!="no":
             cur.execute("select * from sponsor WHERE id=?",(str(row["donar"])))  
             data = cur.fetchall()
         else:
@@ -241,5 +250,5 @@ def sponsor():
 def table():
     con = sqlite3.connect("database.db")
     con.execute("CREATE TABLE sponsor(id INTEGER PRIMARY KEY AUTOINCREMENT,email TEXT NOT NULL,password TEXT NOT NULL,name TEXT NOT NULL,mobile TEXT NOT NULL,gender TEXT NOT NULL,address TEXT NOT NULL,type TEXT NOT NULL)")
-    con.execute("CREATE TABLE student(id INTEGER PRIMARY KEY AUTOINCREMENT,email TEXT NOT NULL,password TEXT NOT NULL,name TEXT NOT NULL,course TEXT NOT NULL,income TEXT NOT NULL,mobile TEXT NOT NULL,mark TEXT NOT NULL,address TEXT NOT NULL,district TEXT NOT NULL,markfile TEXT NOT NULL,incomefile TEXT NOT NULL,gender TEXT NOT NULL,profffile TEXT NOT NULL,status TEXT NOT NULL,donar TEXT NOT NULL)")
+    con.execute("CREATE TABLE student(id INTEGER PRIMARY KEY AUTOINCREMENT,email TEXT NOT NULL,password TEXT NOT NULL,fname TEXT NOT NULL,lname TEXT NOT NULL,course TEXT NOT NULL,income TEXT NOT NULL,mobile TEXT NOT NULL,mark TEXT NOT NULL,address TEXT NOT NULL,district TEXT NOT NULL,sslcfile TEXT NOT NULL,hscfile TEXT NOT NULL,incomefile TEXT NOT NULL,photofile TEXT NOT NULL,profffile TEXT NOT NULL,bankfile TEXT NOT NULL,status TEXT NOT NULL,donar TEXT NOT NULL,gender TEXT NOT NULL,dob TEXT NOT NULL,father TEXT NOT NULL,fo TEXT NOT NULL,mother TEXT NOT NULL,mo TEXT NOT NULL,nation TEXT NOT NULL)")
     return "Table Created"
